@@ -1,0 +1,33 @@
+name: Build RunImage
+
+on:
+    schedule:
+        - cron: "0 16 * * *"
+    workflow_dispatch:
+
+permissions:
+    contents: write
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Build
+              run: |
+                sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns <<<0
+                chmod a+x build-runimage.sh
+                ./build-runimage.sh
+
+            - name: Upload and release RunImage
+              uses: softprops/action-gh-release@v2
+              with:
+                name: Continuous Build
+                tag_name: continuous
+                prerelease: false
+                files: |
+                    ./runimage
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
