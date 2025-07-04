@@ -28,7 +28,7 @@ RIM_HOST_XDG_OPEN="${RIM_HOST_XDG_OPEN:=1}"
 RIM_SYS_NVLIBS="${RIM_SYS_NVLIBS:=1}"
 EOF
 
-rim-build -d -l -c 12 -b 20 runimage
+rim-build -d -l -c 6 -b 19 runimage
 }
 
 export -f run_install
