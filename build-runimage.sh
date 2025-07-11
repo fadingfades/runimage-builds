@@ -12,9 +12,10 @@ INSTALL_PKGS=(
     lib32-libcups lib32-libpulse lib32-libva lib32-libxcomposite lib32-libxinerama lib32-ocl-icd
     lib32-sdl2-compat lib32-v4l-utils lib32-vulkan-icd-loader libgphoto2 libpulse libva
     libxcomposite libxinerama ocl-icd samba sane sdl2-compat v4l-utils vulkan-icd-loader
-    steam mcpelauncher-linux-git mcpelauncher-ui-git pipewire-alsa pipewire-pulse zenity chromium wget
+    steam mcpelauncher-linux-git mcpelauncher-ui-git pipewire-alsa pipewire-pulse zenity google-chrome wget
 )
 
+sudo sed -i 's/^#Server/Server/' /etc/pacman.d/blackarch-mirrorlist
 rim-update
 pac --needed --noconfirm -S "${INSTALL_PKGS[@]}"
 pac -S prismlauncher --noconfirm --assume-installed java-runtime
